@@ -1,0 +1,92 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.quiz, .scores {
+    margin: 100px auto 0 auto;
+    max-width: 400px;
+}
+
+p {
+    font-size: large;
+    margin: 20px 20px;
+}
+
+
+.landing {
+    text-align: center;
+}
+
+.scoresHeader {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.timer {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+}
+
+button {
+    font-size: medium;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    color: #f5eaea;
+    background-color: #342838;
+    border-radius: 5px;
+    border: 5;
+    padding: 20px;
+}
+
+button:hover {
+    background-color: #c3add1;
+}
+
+.options button {
+    display: block;
+}
+
+input[type="text"] {
+    font-size: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.feedback {
+    font-style: bold;
+    font-size: 120%;
+    margin-top: 20px;
+    padding-top: 15px;
+    color: #fff;
+    border-top: 2px solid #4B0082;
+}
+
+ol {
+    padding-left: 20px;
+    max-height: 600px;
+    overflow: auto;
+}
+  
+  li {
+    padding: 5px;
+    list-style: decimal inside none;
+}
+  
+  li:nth-child(odd) {
+    background-color: #dfdae7;
+}
+
+/* This will be applied for the screen sizes smaller than 768px */
+@media screen and (max-width: 768px) {
+
+}
+
+/* This will be applied for the screen sizes smaller than 575px */
+@media screen and  (max-width: 575px) {
+
+}

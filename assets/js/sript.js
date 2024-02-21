@@ -1,5 +1,4 @@
 // List of Quiz questions and answers
-
 var questions = [
     {
       question: "What is the Capital of Canada?",
@@ -30,7 +29,6 @@ var questions = [
   ];
 
 // DOM Elements
-
 var questionsEl = document.getElementById("questions");
 var timerEl = document.getElementById("timer");
 var choicesEl = document.getElementById("options");
@@ -45,3 +43,27 @@ var time = questions.length * 15;
 var timerId;
 
 //Starting quiz and hiding the front page
+function quizStart() {
+    timerId = setInterval(clockTick, 1000);
+    timerEl.textContent = time;
+    var landingScreenEl = document.getElementById("start-screen");
+    landingScreenEl.setAttribute("class", "hide");
+    questionsEl.removeAttribute("class");
+    getQuestion();
+}
+
+// Loop through array of questions and answers, create a list with buttons
+function getQuestion() {
+    var currentQuestion = questions[currentQuestionIndex];
+    var promptEl = document.getElementById("question-words");
+    promptEl.textContent = currentQuestion.question;
+    choicesEl.innerHTML = "";
+    currentQuestion.choices.forEach(function (choice, i) {      
+    var choiceBtn = document.createElement("button"); 
+    choiceBtn.setAttribute("value", choice);
+    choiceBtn.textContent = i + 1 + ". " + choice;
+    choiceBtn.onclick = questionClick;
+    choicesEl.appendChild(choiceBtn);
+    })
+}
+

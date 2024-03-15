@@ -12,12 +12,11 @@ p {
     margin: 20px 20px;
 }
 
-
 .landing {
     text-align: center;
 }
 
-.scoresHeader {
+.scores-header {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -71,22 +70,19 @@ ol {
     max-height: 600px;
     overflow: auto;
 }
-  
-  li {
+
+li {
     padding: 5px;
     list-style: decimal inside none;
 }
-  
-  li:nth-child(odd) {
+
+li:nth-child(odd) {
     background-color: #dfdae7;
 }
 
-/* This will be applied for the screen sizes smaller than 768px */
-@media screen and (max-width: 768px) {
-
-}
-
-/* This will be applied for the screen sizes smaller than 575px */
-@media screen and  (max-width: 575px) {
-
+/* Position highscores underneath "View High Scores" button */
+.highscores {
+    position: absolute;
+    top: 80px;  
+    left: 20px;  
 }

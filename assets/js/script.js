@@ -29,13 +29,13 @@ var questions = [
   ];
 
 // DOM Elements
-var questionsEl = document.getElementById("questions");
-var timerEl = document.getElementById("timer");
-var choicesEl = document.getElementById("options");
-var submitBtn = document.getElementById("submit-score");
-var startBtn = document.getElementById("start");
-var nameEl = document.getElementById("name");
-var feedbackEl = document.getElementById("feedback");
+var questionsEl = document.querySelector("#questions");
+var timerEl = document.querySelector("#timer");
+var choicesEl = document.querySelector("#options");
+var submitBtn = document.querySelector("#submit-score");
+var startBtn = document.querySelector("#start");
+var nameEl = document.querySelector("#name");
+var feedbackEl = document.querySelector("#feedback");
 var reStartBtn = document.querySelector("#restart");
 var scoresBtn = document.querySelector("#view-high-scores");
 var clearScoresBtn = document.querySelector("#clear");
@@ -58,17 +58,17 @@ function quizStart(event) {
 
 // Loop through array of questions and answers, create a list with buttons
 function getQuestion() {
-    var currentQuestion = questions[currentQuestionIndex];
-    var promptEl = document.getElementById("question-words");
-    promptEl.textContent = currentQuestion.question;
-    choicesEl.innerHTML = "";
-    currentQuestion.choices.forEach(function (choice, i) {      
-    var choiceBtn = document.createElement("button"); 
+  var currentQuestion = questions[currentQuestionIndex];
+  var promptEl = document.getElementById("question-words")
+  promptEl.textContent = currentQuestion.question;
+  choicesEl.innerHTML = "";
+  currentQuestion.choices.forEach(function(choice, i) {
+    var choiceBtn = document.createElement("button");
     choiceBtn.setAttribute("value", choice);
     choiceBtn.textContent = i + 1 + ". " + choice;
     choiceBtn.onclick = questionClick;
     choicesEl.appendChild(choiceBtn);
-    })
+  });
 }
 
 // Checking for the correct answer and deducting time for the wrong answers. Going to the next question.
@@ -151,7 +151,20 @@ reStartBtn.addEventListener("click", function() {
 // Flag to indicate if the score has been submitted
 var scoreSubmitted = false;
 
-
+// Saving player's name and score in local storage
+function saveHighscore() {
+  var name = nameEl.value.trim();
+  if (name !== "" && currentQuestionIndex === questions.length && !scoreSubmitted) {
+      var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+      var newScore = {
+          score: time,
+          name: name
+      };
+      highscores.push(newScore);
+      window.localStorage.setItem("highscores", JSON.stringify(highscores));
+      scoreSubmitted = true; // Set the flag to true
+  }
+}
 
 // Function to restart the quiz
 function restartQuiz() {
@@ -160,16 +173,20 @@ function restartQuiz() {
   clearInterval(timerId);
   timerId = null;
   quizStart(event);
-}
 
-   // Reset the scoreSubmitted flag
-   scoreSubmitted = false;
+  // Reset the scoreSubmitted flag
+  scoreSubmitted = false;
 
-   // Hide the high scores area
+  // Hide the high scores area
   var highscoresEl = document.querySelector(".highscores");
   highscoresEl.classList.add("hide");
 
-  // Start quiz by clicking start quiz
+  // Hide the final score message area
+  var finalScoreMessageEl = document.getElementById("quiz-end");
+  finalScoreMessageEl.classList.add("hide");
+}
+
+// Start quiz by clicking start quiz
 startBtn.addEventListener("click", function(event) {
   quizStart(event);
 });
@@ -191,10 +208,18 @@ clearScoresBtn.addEventListener("click", function() {
   clearHighscores();
 });
 
-
 // Function to clear high scores
 function clearHighscores() {
   window.localStorage.removeItem("highscores");
   printHighscores();
 }
 
+// Saving player's score by clicking enter
+nameEl.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
+});
+
+// Saving player's score by clicking submit
+submitBtn.onclick = saveHighscore;

@@ -144,3 +144,26 @@ function printHighscores() {
 reStartBtn.addEventListener("click", function() {
   restartQuiz();
 });
+
+// Saving player's name and score in local storage
+function saveHighscore() {
+  var name = nameEl.value.trim();
+  if (name !== "" && currentQuestionIndex === questions.length && !scoreSubmitted) {
+      var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+      var newScore = {
+          score: time,
+          name: name
+      };
+      highscores.push(newScore);
+      window.localStorage.setItem("highscores", JSON.stringify(highscores));
+      scoreSubmitted = true; // Set the flag to true
+  }
+}
+// Function to restart the quiz
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  time = questions.length * 15;
+  clearInterval(timerId);
+  timerId = null;
+  quizStart(Event);
+}

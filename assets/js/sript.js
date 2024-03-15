@@ -38,6 +38,7 @@ var nameEl = document.getElementById("name");
 var feedbackEl = document.getElementById("feedback");
 var reStartBtn = document.querySelector("#restart");
 var scoresBtn = document.querySelector("#view-high-scores");
+var clearScoresBtn = document.querySelector("#clear");
 
 // Initial stage of the quiz
 var currentQuestionIndex = 0;
@@ -45,13 +46,14 @@ var time = questions.length * 15;
 var timerId;
 
 //Starting quiz and hiding the front page
-function quizStart() {
-    timerId = setInterval(clockTick, 1000);
-    timerEl.textContent = time;
-    var landingScreenEl = document.getElementById("start-screen");
-    landingScreenEl.setAttribute("class", "hide");
-    questionsEl.removeAttribute("class");
-    getQuestion();
+function quizStart(event) {
+  event.preventDefault(); // Prevent the default behavior of the button
+  timerId = setInterval(clockTick, 1000);
+  timerEl.textContent = time;
+  var landingScreenEl = document.getElementById("start-screen");
+  landingScreenEl.setAttribute("class", "hide");
+  questionsEl.removeAttribute("class");
+  getQuestion();
 }
 
 // Loop through array of questions and answers, create a list with buttons
@@ -68,6 +70,7 @@ function getQuestion() {
     choicesEl.appendChild(choiceBtn);
     })
 }
+
 // Checking for the correct answer and deducting time for the wrong answers. Going to the next question.
 function questionClick() {
   if (this.value !== questions[currentQuestionIndex].answer) {
@@ -194,16 +197,4 @@ function clearHighscores() {
   window.localStorage.removeItem("highscores");
   printHighscores();
 }
-
-// Saving player's score by clicking enter
-nameEl.addEventListener("keyup", function(event) {
-  if (event.key === "Enter") {
-    saveHighscore();
-  }
-});
-
-// Saving player's score by clicking submit
-submitBtn.onclick = saveHighscore;
-
-
 

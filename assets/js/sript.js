@@ -194,3 +194,16 @@ function clearHighscores() {
   window.localStorage.removeItem("highscores");
   printHighscores();
 }
+
+// Saving player's score by clicking enter
+nameEl.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    saveHighscore();
+  }
+});
+
+// Saving player's score by clicking submit
+submitBtn.onclick = saveHighscore;
+
+
+

@@ -37,10 +37,16 @@ https://github.com/Igimbayeva/Are_you_smarter_than_a_fifth_grader
 https://igimbayeva.github.io/Are_you_smarter_than_a_fifth_grader/
 
 ##  Mockup
-
+![Mockup](https://github.com/Igimbayeva/Are_you_smarter_than_a_fifth_grader/blob/main/assets/04-web-apis-homework-demo.gif)
 
 ## Screenshots:
-Include screenshots of different stages of the game, such as the introduction, trivia questions, and high scores page.
+![P1](https://github.com/Igimbayeva/Are_you_smarter_than_a_fifth_grader/blob/main/assets/p1.PNG)
+<br>
+<br>
+![P2](https://github.com/Igimbayeva/Are_you_smarter_than_a_fifth_grader/blob/main/assets/p2.PNG)
+<br>
+<br>
+![High Score](https://github.com/Igimbayeva/Are_you_smarter_than_a_fifth_grader/blob/main/assets/p3.PNG)
 
 ## Acknowledgments:
 Special thanks to the creators of the "Are You Smarter Than a Fifth Grader?" TV show for inspiring this project.

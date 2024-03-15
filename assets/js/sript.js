@@ -145,25 +145,52 @@ reStartBtn.addEventListener("click", function() {
   restartQuiz();
 });
 
-// Saving player's name and score in local storage
-function saveHighscore() {
-  var name = nameEl.value.trim();
-  if (name !== "" && currentQuestionIndex === questions.length && !scoreSubmitted) {
-      var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
-      var newScore = {
-          score: time,
-          name: name
-      };
-      highscores.push(newScore);
-      window.localStorage.setItem("highscores", JSON.stringify(highscores));
-      scoreSubmitted = true; // Set the flag to true
-  }
-}
+// Flag to indicate if the score has been submitted
+var scoreSubmitted = false;
+
+
+
 // Function to restart the quiz
 function restartQuiz() {
   currentQuestionIndex = 0;
   time = questions.length * 15;
   clearInterval(timerId);
   timerId = null;
-  quizStart(Event);
+  quizStart(event);
+}
+
+   // Reset the scoreSubmitted flag
+   scoreSubmitted = false;
+
+   // Hide the high scores area
+  var highscoresEl = document.querySelector(".highscores");
+  highscoresEl.classList.add("hide");
+
+  // Start quiz by clicking start quiz
+startBtn.addEventListener("click", function(event) {
+  quizStart(event);
+});
+
+// Event listener for viewing high scores
+scoresBtn.addEventListener("click", function() {
+  viewHighScores();
+});
+
+// Function to view high scores
+function viewHighScores() {
+  var highscoresEl = document.querySelector(".highscores");
+  highscoresEl.classList.toggle("hide");
+  printHighscores();
+}
+
+// Event listener for clearing high scores
+clearScoresBtn.addEventListener("click", function() {
+  clearHighscores();
+});
+
+
+// Function to clear high scores
+function clearHighscores() {
+  window.localStorage.removeItem("highscores");
+  printHighscores();
 }
